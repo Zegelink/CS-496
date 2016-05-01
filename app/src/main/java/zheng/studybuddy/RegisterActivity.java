@@ -16,29 +16,19 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class LoginActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
+        setContentView(R.layout.activity_register);
 
         final EditText etEmail = (EditText) findViewById(R.id.etEmail);
         final EditText etPassword = (EditText) findViewById(R.id.etPassword);
 
-        final Button bLogin = (Button) findViewById(R.id.bLogin);
-        final TextView registerLink = (TextView) findViewById(R.id.tvRegisterHere);
+        final Button bRegister = (Button) findViewById(R.id.bRegister);
 
-        registerLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
-                LoginActivity.this.startActivity(registerIntent);
-            }
-
-        });
-        bLogin.setOnClickListener(new View.OnClickListener(){
+        bRegister.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 final String email = etEmail.getText().toString();
@@ -52,14 +42,12 @@ public class LoginActivity extends AppCompatActivity {
                             boolean success = jsonResponse.getBoolean("success");
 
                             if (success){
-                                String email = jsonResponse.getString("email");
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                intent.putExtra("email", email);
-                                LoginActivity.this.startActivity(intent);
+                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                RegisterActivity.this.startActivity(intent);
                             }
                             else {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                                builder.setMessage("Login failed")
+                                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                                builder.setMessage("Register failed")
                                         .setNegativeButton("Retry", null)
                                         .create()
                                         .show();
@@ -69,9 +57,9 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 };
-                LoginRequest lr = new LoginRequest(email, password, rl);
-                RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
-                queue.add(lr);
+                RegisterRequest rr = new RegisterRequest(email, password, rl);//response listener
+                RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
+                queue.add(rr);
             }
         });
     }
