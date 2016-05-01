@@ -31,4 +31,15 @@
         android:layout_alignParentEnd="true"
         android:layout_marginRight="51dp"
         android:layout_marginEnd="51dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Login"
+        android:id="@+id/tvLogin"
+        android:layout_alignTop="@+id/listView"
+        android:layout_alignRight="@+id/editText"
+        android:layout_alignEnd="@+id/editText"
+        android:layout_marginTop="164dp" />
 </RelativeLayout>
