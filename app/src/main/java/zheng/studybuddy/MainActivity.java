@@ -20,8 +20,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //add the link to the login
         final TextView loginLink = (TextView) findViewById(R.id.tvLogin);
-
         loginLink.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
