@@ -9,10 +9,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.view.View;
+import android.view.View.OnClickListener;
+
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
 
+
+    Button addButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,14 +32,39 @@ public class MainActivity extends AppCompatActivity {
 
         //add the link to the login
         final TextView loginLink = (TextView) findViewById(R.id.tvLogin);
-        loginLink.setOnClickListener(new View.OnClickListener(){
+        loginLink.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 Intent LoginIntent = new Intent(MainActivity.this, LoginActivity.class);
                 MainActivity.this.startActivity(LoginIntent);
             }
         });
+
+        addButton = (Button) findViewById(R.id.addClassButton);
+        addButton.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+
+                Intent myIntent = new Intent(MainActivity.this, AddClass.class);
+                startActivity(myIntent);
+            }
+
+        });}
+
+    public void onResume() {
+        super.onResume();
+        ListView list;
+        ArrayList<String> listitems = new ArrayList<String>();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, listitems);
+        list = (ListView) findViewById(R.id.listView);
+        list.setAdapter(adapter);
+        Bundle data = getIntent().getExtras();
+        if (data != null) {
+
+            String str = data.getString("class");
+            adapter.add(str);
+        }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
