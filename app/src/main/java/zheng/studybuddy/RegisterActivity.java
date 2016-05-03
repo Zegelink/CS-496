@@ -25,6 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         final EditText etEmail = (EditText) findViewById(R.id.etEmail);
         final EditText etPassword = (EditText) findViewById(R.id.etPassword);
+        final EditText etConfirm = (EditText) findViewById(R.id.etConfirm);
 
         final Button bRegister = (Button) findViewById(R.id.bRegister);
 
@@ -33,6 +34,19 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v){
                 final String email = etEmail.getText().toString();
                 final String password = etPassword .getText().toString();
+                final String confirm = etConfirm.getText().toString();
+
+                boolean check = false;
+                if (password == confirm){
+                    check = true;
+                }
+                else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                    builder.setMessage("Password doesn't match")
+                            .setNegativeButton("Retry", null)
+                            .create()
+                            .show();
+                }
 
                 Response.Listener<String> rl = new Response.Listener<String>() {
                     @Override
@@ -57,9 +71,11 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     }
                 };
-                RegisterRequest rr = new RegisterRequest(email, password, rl);//response listener
-                RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
-                queue.add(rr);
+                if (check) {
+                    RegisterRequest rr = new RegisterRequest(email, password, rl);//response listener
+                    RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
+                    queue.add(rr);
+                }
             }
         });
     }
