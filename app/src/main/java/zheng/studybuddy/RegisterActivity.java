@@ -36,17 +36,60 @@ public class RegisterActivity extends AppCompatActivity {
                 final String password = etPassword .getText().toString();
                 final String confirm = etConfirm.getText().toString();
 
+                //do check password here
                 boolean check = false;
-                if (password == confirm){
-                    check = true;
+                //check if the user enters required fields
+                if (email != null && !email.isEmpty() &&
+                        password !=null && !password.isEmpty()){
+                    //check if the length of password is at least 6
+                    if (password.length() > 5){
+                        //check if the password contains at least a letter
+                        if (password.matches(".*[a-zA-Z]+.*")){
+                            //check if the password matches the confirm password
+                            if (password.equals(confirm)){
+                                check = true;
+                            }
+                            else {
+                                check = false;
+                                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                                builder.setMessage("Password doesn't match")
+                                        .setNegativeButton("Retry", null)
+                                        .create()
+                                        .show();
+                            }
+                        }
+                        else{
+                            check = false;
+                            AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                            builder.setMessage("Password must contain at least 1 character")
+                                    .setNegativeButton("Retry", null)
+                                    .create()
+                                    .show();
+                        }
+                    }
+                    else {
+                        check = false;
+                        AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                        builder.setMessage("Password should be at least 6 characters")
+                                .setNegativeButton("Retry", null)
+                                .create()
+                                .show();
+                        onStop();
+
+                    }
+
                 }
                 else {
+                    check = false;
                     AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
-                    builder.setMessage("Password doesn't match")
+                    builder.setMessage("You must fill all fields")
                             .setNegativeButton("Retry", null)
                             .create()
                             .show();
                 }
+
+
+
 
                 Response.Listener<String> rl = new Response.Listener<String>() {
                     @Override
