@@ -61,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Password should be at least 6 characters with at least 1 letter."
+        android:text="Password should be at least 6 characters with at least 1 Number."
         android:id="@+id/textView3"
         android:layout_below="@+id/bRegister"
         android:layout_alignParentLeft="true"
