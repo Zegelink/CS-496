@@ -21,8 +21,10 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    ListView list;
     Button addButton;
+    ArrayList<String> listitems;
+    ArrayAdapter<String> adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         addButton = (Button) findViewById(R.id.addClassButton);
+        ArrayList<String> listitems = new ArrayList<String>();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, listitems);
         addButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
 
@@ -48,22 +52,31 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(myIntent);
             }
 
-        });}
-
-    public void onResume() {
-        super.onResume();
-        ListView list;
-        ArrayList<String> listitems = new ArrayList<String>();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, listitems);
+        });
         list = (ListView) findViewById(R.id.listView);
         list.setAdapter(adapter);
         Bundle data = getIntent().getExtras();
         if (data != null) {
 
-            String str = data.getString("class");
-            adapter.add(str);
+            // String str = data.getString("class");
+            //   adapter.add(str);
+
         }
     }
+
+    //  public void onResume() {
+    //       super.onResume();
+    // ArrayList<String> listitems = new ArrayList<String>();
+    // ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, listitems);
+    //       list = (ListView) findViewById(R.id.listView);
+    //      list.setAdapter(adapter);
+    //      Bundle data = getIntent().getExtras();
+    //      if (data != null) {
+
+    //          String str = data.getString("class");
+    //           adapter.add(str);
+    //       }
+    //   }
 
 
     @Override
