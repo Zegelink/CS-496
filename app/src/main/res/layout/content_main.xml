@@ -20,7 +20,8 @@
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="33dp" />
+        android:layout_marginTop="33dp"
+        android:layout_above="@+id/addClassButton" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -31,4 +32,25 @@
         android:layout_alignParentEnd="true"
         android:layout_marginRight="51dp"
         android:layout_marginEnd="51dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Login"
+        android:id="@+id/tvLogin"
+        android:layout_alignTop="@+id/listView"
+        android:layout_alignRight="@+id/editText"
+        android:layout_alignEnd="@+id/editText"
+        android:layout_marginTop="164dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Class"
+        android:id="@+id/addClassButton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="101dp" />
 </RelativeLayout>
