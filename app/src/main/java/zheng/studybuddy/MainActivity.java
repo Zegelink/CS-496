@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
 
     ListView list;
     Button addButton;
+    Button loginLink;
+    Button registerLink;
     ArrayList<String> listitems;
     ArrayAdapter<String> adapter;
     @Override
@@ -33,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //add the link to the login
-        final TextView loginLink = (TextView) findViewById(R.id.tvLogin);
+        loginLink = (Button) findViewById(R.id.tvLogin);
         loginLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,6 +43,15 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(LoginIntent);
             }
         });
+        registerLink = (Button) findViewById(R.id.Registerbutton);
+        registerLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent registerIntent = new Intent(MainActivity.this, RegisterActivity.class);
+                MainActivity.this.startActivity(registerIntent);
+            }
+        });
+
 
         addButton = (Button) findViewById(R.id.addClassButton);
         ArrayList<String> listitems = new ArrayList<String>();
