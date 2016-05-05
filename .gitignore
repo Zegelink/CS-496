@@ -1,7 +1,13 @@
+# Building Material
+.idea/*
 .gradle
-/local.properties
-/.idea/workspace.xml
-/.idea/libraries
-.DS_Store
+target/*
+*.iml
 /build
+app/build/*
 /captures
+/local.properties
+
+# Thumbnail stuff
+._*
+.DS_Store
