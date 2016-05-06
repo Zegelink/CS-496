@@ -5,9 +5,9 @@ import android.provider.BaseColumns;
 /**
  * Created by Zheng on 5/2/2016.
  */
-public class classeTable {
+public class classTable {
 
-    public classeTable(){
+    public classTable(){
 
 
 
@@ -15,9 +15,10 @@ public class classeTable {
 
     public static abstract class Table implements BaseColumns{
 
-        public static final String classname = "classname";
-        public static final String schoolname = "schoolname";
+        public static final String className = "className";
+        public static final String schoolName = "schoolName";
         public static final String database = "currentClassTable";
-        public static final String table = "classinfo";
+        public static final String table = "classInfo";
     }
+
 }

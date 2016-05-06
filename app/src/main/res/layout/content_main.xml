@@ -9,54 +9,60 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_main" tools:context=".MainActivity">
 
-    <TextView android:text="Enrolled Classes" android:layout_width="wrap_content"
+    <TextView android:text="@string/enrolled_classes" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView" />
+        android:id="@+id/textView"
+        android:enabled="false"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+        android:textSize="@dimen/abc_text_size_title_material"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="33dp"
-        android:layout_above="@+id/addClassButton"
-        android:layout_alignRight="@+id/textView"
-        android:layout_alignEnd="@+id/textView"
-        android:clickable="true" />
+        android:clickable="true"
+        android:visibility="visible"
+        android:layout_below="@+id/user"
+        android:layout_toStartOf="@+id/Registerbutton"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/addClassButton" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Login"
-        android:id="@+id/tvLogin"
-        android:layout_alignBottom="@+id/listView"
-        android:layout_marginBottom="152dp"
-        android:layout_alignRight="@+id/Registerbutton"
-        android:layout_alignEnd="@+id/Registerbutton"
-        android:layout_alignLeft="@+id/Registerbutton"
-        android:layout_alignStart="@+id/Registerbutton" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add Class"
+        android:text="@string/title_activity_add_class"
         android:id="@+id/addClassButton"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="101dp" />
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:text="@string/login"
+        android:id="@+id/tvLogin"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/Registerbutton"
+        android:layout_toStartOf="@+id/Registerbutton"
+        android:layout_height="wrap_content" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register"
+        android:text="@string/register"
         android:id="@+id/Registerbutton"
-        android:layout_centerVertical="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="46dp"
-        android:layout_marginEnd="46dp" />
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome."
+        android:id="@+id/user"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

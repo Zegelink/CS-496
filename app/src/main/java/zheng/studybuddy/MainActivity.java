@@ -1,9 +1,11 @@
 package zheng.studybuddy;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -22,10 +24,11 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     ListView list;
+    classDatabase db;
     Button addButton;
     Button loginLink;
     Button registerLink;
-    ArrayList<String> listitems;
+    ArrayList<String> listItems;
     ArrayAdapter<String> adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +57,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         addButton = (Button) findViewById(R.id.addClassButton);
-        ArrayList<String> listitems = new ArrayList<String>();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, listitems);
+        ArrayList<String> listItems = new ArrayList<String>();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, listItems);
         addButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
 
@@ -64,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
         list = (ListView) findViewById(R.id.listView);
         list.setAdapter(adapter);
         Bundle data = getIntent().getExtras();
@@ -71,8 +75,23 @@ public class MainActivity extends AppCompatActivity {
 
             // String str = data.getString("class");
             //   adapter.add(str);
+        }
+        Cursor value = db.displayTable();
+
+        StringBuffer buffer = new StringBuffer();
+        while (value.moveToNext()){
+            buffer.append("School:"+ value.getString(0)+"\n");
+            buffer.append("Class:"+ value.getString(1)+"\n");
 
         }
+
+    }
+    public void showMessage (String title, String Message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(Message);
+        builder.show();
     }
 
     //  public void onResume() {
