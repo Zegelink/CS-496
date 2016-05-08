@@ -76,14 +76,14 @@ public class MainActivity extends AppCompatActivity {
             // String str = data.getString("class");
             //   adapter.add(str);
         }
-        //Cursor value = db.displayTable();
+/*        Cursor value = db.displayTable();
 
-        //StringBuffer buffer = new StringBuffer();
-        //while (value.moveToNext()){
-        //    buffer.append("School:"+ value.getString(0)+"\n");
-        //    buffer.append("Class:"+ value.getString(1)+"\n");
+        StringBuffer buffer = new StringBuffer();
+        while (value.moveToNext()){
+            buffer.append("School:"+ value.getString(0)+"\n");
+            buffer.append("Class:"+ value.getString(1)+"\n");
 
-        }
+*/        }
 
     }
     public void showMessage (String title, String Message) {
