@@ -3,8 +3,6 @@ package zheng.studybuddy;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -13,11 +11,11 @@ import android.widget.EditText;
 
 public class AddClass extends AppCompatActivity {
 
-    EditText schoolname;
-    EditText classname;
-    Button addclass;
-    String classstring;
-    String schoolstring;
+    EditText schoolName;
+    EditText className;
+    Button addClass;
+    String classString;
+    String schoolString;
     Context ctx = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,18 +27,19 @@ public class AddClass extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        addclass = (Button) findViewById(R.id.clicktoadd);
-        addclass.setOnClickListener(new View.OnClickListener() {
+        addClass = (Button) findViewById(R.id.clicktoadd);
+        addClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                classname = (EditText) findViewById(R.id.editText2);
-                schoolname = (EditText) findViewById(R.id.editText3);
-                classstring = classname.getText().toString();
-                schoolstring = schoolname.getText().toString();
+                className = (EditText) findViewById(R.id.editText2);
+                schoolName = (EditText) findViewById(R.id.editText3);
+                classString = className.getText().toString();
+                schoolString = schoolName.getText().toString();
                 classDatabase Db = new classDatabase(ctx);
-                Db.fillTable(Db, classstring, schoolstring);
+                Db.fillTable(Db, classString, schoolString);
+                Db.displayTable();
                 Intent addClassToList = new Intent(AddClass.this, MainActivity.class);
-              //  addClassToList.putExtra("class", classname.getText().toString());
+              //  addClassToList.putExtra("class", className.getText().toString());
                 startActivity(addClassToList);
             }
         });

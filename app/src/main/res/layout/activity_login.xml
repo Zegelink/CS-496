@@ -39,7 +39,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text="@string/login"
         android:id="@+id/bLogin"
         android:layout_below="@+id/etPassword"
         android:layout_alignParentRight="true"
