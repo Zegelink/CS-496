@@ -25,7 +25,7 @@
         android:id="@+id/listView"
         android:clickable="true"
         android:visibility="visible"
-        android:layout_below="@+id/user"
+        android:layout_below="@+id/tvWelcomeMsg"
         android:layout_toStartOf="@+id/Registerbutton"
         android:layout_alignParentEnd="true"
         android:layout_above="@+id/addClassButton" />
@@ -60,8 +60,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome."
-        android:id="@+id/user"
+        android:id="@+id/tvWelcomeMsg"
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />

@@ -18,6 +18,8 @@ import android.widget.TextView;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 
@@ -36,6 +38,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //Display the user email when he logs in
+        final TextView welcomeMessage = (TextView)findViewById(R.id.tvWelcomeMsg);
+        String message;
+        Intent intent = getIntent();
+        String email = intent.getStringExtra("email");
+        if (email!=null) {
+            message = email + ", welcome to study!";
+        }
+        else{
+            message = "Login to study with your buddy!";
+        }
+        welcomeMessage.setText(message);
+
 
         //add the link to the login
         loginLink = (Button) findViewById(R.id.tvLogin);
@@ -85,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
 
 */        }
 
-    }
     public void showMessage (String title, String Message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
