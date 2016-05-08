@@ -81,10 +81,10 @@ public class MainActivity extends AppCompatActivity {
         StringBuffer buffer = new StringBuffer();
         while (value.moveToNext()){
             buffer.append("School:"+ value.getString(0)+"\n");
-            buffer.append("Class:"+ value.getString(1)+"\n");*/
+            buffer.append("Class:"+ value.getString(1)+"\n");
 
         }
-
+*/
     }
     public void showMessage (String title, String Message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
