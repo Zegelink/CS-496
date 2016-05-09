@@ -57,30 +57,47 @@ public class classDatabase extends SQLiteOpenHelper {
         return values;
     }
 
-    public List<String> getAllClass() {
-        List<String> classList = new ArrayList<>();
+    public List<Classes> getAllClass() {
+        List<Classes> classList = new ArrayList<>();
 
         // select query
         String selectQuery = "SELECT  * FROM " + TABLE_NAME;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-        String classN;
-        String schoolN;
-        String finalN;
+
         // looping through all table records and adding to list
         if (cursor.moveToFirst()) {
             do {
-                classN = cursor.getString(1)+"\n";
-                schoolN = cursor.getString(2)+"\n\n";
-                finalN = classN+schoolN;
+                Classes classes = new Classes();
+                classes.setId(Integer.parseInt(cursor.getString(0)));
+                classes.setClassTaking(cursor.getString(1));
+                classes.setSchool(cursor.getString(2));
 
                 // Adding friend to list
-                classList.add(finalN);
+                classList.add(classes);
             } while (cursor.moveToNext());
         }
 
         return classList;
+    }
+
+    public int updateFriend(Classes friend) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COL_2, friend.getClassTaking());
+        values.put(COL_3, friend.getSchool());
+
+        // updating row
+        return db.update(TABLE_NAME, values, COL_1 + " = ?", new String[]{String.valueOf(friend.getId())});
+    }
+
+    // Deleting a record in database table
+    public void deleteFriend(Classes friend) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME, COL_1 + " = ?", new String[]{String.valueOf(friend.getId())});
+        db.close();
     }
 
 

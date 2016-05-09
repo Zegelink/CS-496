@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     Button loginLink;
     Button registerLink;
     Button viewAll;
-    List<String> classList;
+    List<Classes> classList;
     private ListViewAdapter adapter;
 
 
@@ -46,7 +47,12 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        list = (ListView) findViewById(R.id.lvClass);
+
+
         db = new classDatabase(this);
+        classList = new ArrayList<>();
+        reloadingDatabase();
 
         final TextView welcomeMessage = (TextView) findViewById(R.id.tvWelcomeMsg);
         String message;
@@ -60,9 +66,10 @@ public class MainActivity extends AppCompatActivity {
             message = "Login to study with your buddy!";
         }
         welcomeMessage.setText(message);
-        classList=db.getAllClass();
-        adapter = new ListViewAdapter(this, R.layout.item_listview, classList, db);
-        list.setAdapter(adapter);
+
+        //classList=db.getAllClass();
+        //adapter = new ListViewAdapter(this, R.layout.item_listview, classList, db);
+        //list.setAdapter(adapter);
 
         //add the link to the login
         loginLink = (Button) findViewById(R.id.tvLogin);
@@ -171,6 +178,19 @@ public class MainActivity extends AppCompatActivity {
         );
 
     }
+
+    public void reloadingDatabase() {
+        classList = db.getAllClass();
+        if (classList.size() == 0) {
+            Toast.makeText(this, "No record found in database!", Toast.LENGTH_SHORT).show();
+            //title.setVisibility(View.GONE);
+        }
+        adapter = new ListViewAdapter(this, R.layout.item_listview, classList, db);
+        list.setAdapter(adapter);
+        //title.setVisibility(View.VISIBLE);
+        //title.setText("Total records: " + databaseHelper.getContactsCount());
+    }
+
 
 
 }

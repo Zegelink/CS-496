@@ -23,12 +23,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/lvClass"
-        android:clickable="true"
-        android:visibility="visible"
         android:layout_below="@+id/tvWelcomeMsg"
-        android:layout_toStartOf="@+id/Registerbutton"
-        android:layout_alignParentEnd="true"
-        android:layout_above="@+id/addClassButton" />
+        android:layout_above="@+id/addClassButton"
+        android:visibility="visible" />
 
     <Button
         android:layout_width="wrap_content"
@@ -72,5 +69,6 @@
         android:id="@+id/bViewAll"
         android:layout_below="@+id/tvLogin"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:visibility="gone" />
 </RelativeLayout>

@@ -17,17 +17,17 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class ListViewAdapter extends ArrayAdapter<String> {
+public class ListViewAdapter extends ArrayAdapter<Classes> {
 
     private MainActivity activity;
     private classDatabase databaseHelper;
-    private List<String> classList;
+    private List<Classes> classesList;
 
-    public ListViewAdapter(MainActivity context, int resource, List<String> objects, classDatabase helper) {
+    public ListViewAdapter(MainActivity context, int resource, List<Classes> objects, classDatabase helper) {
         super(context, resource, objects);
         this.activity = context;
         this.databaseHelper = helper;
-        this.classList = objects;
+        this.classesList = objects;
     }
 
     @Override
@@ -43,10 +43,10 @@ public class ListViewAdapter extends ArrayAdapter<String> {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.name.setText(getItem(position));
+        holder.name.setText(getItem(position).getClassTaking());
 
         //Delete an item
-        /*holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 databaseHelper.deleteFriend(getItem(position)); //delete in db
@@ -55,29 +55,29 @@ public class ListViewAdapter extends ArrayAdapter<String> {
                 //reload the database to view
                 activity.reloadingDatabase();
             }
-        });*/
+        });
 
         //Edit/Update an item
-        /*holder.btnEdit.setOnClickListener(new View.OnClickListener() {
+        holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(activity);
-                alertDialog.setTitle("Update a Friend");
+                alertDialog.setTitle("Update Your Class");
 
                 LinearLayout layout = new LinearLayout(activity);
                 layout.setPadding(10, 10, 10, 10);
                 layout.setOrientation(LinearLayout.VERTICAL);
 
                 final EditText nameBox = new EditText(activity);
-                nameBox.setHint("Name");
+                nameBox.setHint("Class");
                 layout.addView(nameBox);
 
                 final EditText jobBox = new EditText(activity);
-                jobBox.setHint("job");
+                jobBox.setHint("School");
                 layout.addView(jobBox);
 
-                nameBox.setText(getItem(position).getName());
-                jobBox.setText(getItem(position).getJob());
+                nameBox.setText(getItem(position).getClassTaking());
+                jobBox.setText(getItem(position).getSchool());
 
                 alertDialog.setView(layout);
 
@@ -85,7 +85,7 @@ public class ListViewAdapter extends ArrayAdapter<String> {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Friend friend = new Friend(nameBox.getText().toString(), jobBox.getText().toString());
+                        Classes friend = new Classes(nameBox.getText().toString(), jobBox.getText().toString());
                         friend.setId(getItem(position).getId());
                         databaseHelper.updateFriend(friend); //update to db
                         Toast.makeText(activity, "Updated!", Toast.LENGTH_SHORT).show();
@@ -100,14 +100,14 @@ public class ListViewAdapter extends ArrayAdapter<String> {
                 //show alert
                 alertDialog.show();
             }
-        });*/
+        });
 
         //show details when each row item clicked
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(activity);
-                alertDialog.setTitle("Friend ");
+                alertDialog.setTitle("Class ");
 
                 LinearLayout layout = new LinearLayout(activity);
                 layout.setPadding(10, 10, 10, 10);
@@ -119,8 +119,8 @@ public class ListViewAdapter extends ArrayAdapter<String> {
                 TextView jobBox = new TextView(activity);
                 layout.addView(jobBox);
 
-                nameBox.setText("Friend name: " + getItem(position));
-                jobBox.setText("Friend job: " + getItem(position));
+                nameBox.setText("ID: " + getItem(position).getId());
+                jobBox.setText("School: " + getItem(position).getSchool());
 
                 alertDialog.setView(layout);
                 alertDialog.setNegativeButton("OK", null);
