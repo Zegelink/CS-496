@@ -1,7 +1,9 @@
 package zheng.studybuddy;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -25,8 +27,12 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+
     ListView list;
-    classDatabase db;
+    Cursor cursor;
+    ListDataAdapter listdataadapter;
+    SQLiteDatabase sqlitedatabase;
+    classDatabase database;
     Button addButton;
     Button loginLink;
     Button registerLink;
@@ -73,8 +79,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         addButton = (Button) findViewById(R.id.addClassButton);
-        ArrayList<String> listItems = new ArrayList<String>();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, listItems);
+     //   ArrayList<String> listItems = new ArrayList<String>();
+     //   ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, listItems);
         addButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
 
@@ -85,13 +91,35 @@ public class MainActivity extends AppCompatActivity {
         });
 
         list = (ListView) findViewById(R.id.listView);
-        list.setAdapter(adapter);
-        Bundle data = getIntent().getExtras();
-        if (data != null) {
+        listdataadapter = new ListDataAdapter(getApplicationContext(), R.layout.display_row );
+        list.setAdapter(listdataadapter);
+        database = new classDatabase(getApplicationContext());
+        sqlitedatabase = database.getReadableDatabase();
+        cursor = database.getInformation(sqlitedatabase);
+
+        if(cursor.moveToFirst()){
+
+            do{
+
+                String classname;
+                String schoolname;
+
+                classname = cursor.getString(0);
+                schoolname = cursor.getString(1);
+
+                DataProvider dataprovider = new DataProvider(classname, schoolname);
+                listdataadapter.add(dataprovider);
+            }while(cursor.moveToNext());
+
+        }
+
+       // list.setAdapter(adapter);
+       // Bundle data = getIntent().getExtras();
+       // if (data != null) {
 
             // String str = data.getString("class");
             //   adapter.add(str);
-        }
+       // }
 /*        Cursor value = db.displayTable();
 
         StringBuffer buffer = new StringBuffer();

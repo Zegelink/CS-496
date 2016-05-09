@@ -47,6 +47,17 @@ public class classDatabase extends SQLiteOpenHelper {
         Log.d("Database operations", "Row inserted");
     }
 
+    public Cursor getInformation(SQLiteDatabase db){
+
+        String[] projections = {classTable.Table.className,classTable.Table.schoolName};
+        Cursor cursor = db.query(classTable.Table.table, projections, null, null, null, null, null);
+
+
+         return cursor;
+
+    }
+
+
     public Cursor displayTable(){
 
         SQLiteDatabase db = this.getWritableDatabase();
