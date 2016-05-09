@@ -16,9 +16,12 @@ import java.util.List;
 public class classDatabase extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "Class.db";
     public static final String TABLE_NAME = "ClassInfo";
+    public static final String TABLE_NAME2 = "TimeStudied";
     public static final String COL_1 = "ID";
     public static final String COL_2 = "Class";
     public static final String COL_3 = "School";
+    public static final String COL_4 = "Time";
+
 
     public classDatabase(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -27,12 +30,14 @@ public class classDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        db.execSQL("create table " + TABLE_NAME2 +" (ID INTEGER PRIMARY KEY AUTOINCREMENT, Time Text)");
         db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,Class TEXT,School TEXT)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME2);
         onCreate(db);
     }
     public boolean insertData(String className, String school){
@@ -47,14 +52,40 @@ public class classDatabase extends SQLiteOpenHelper {
         else{
             return true;
         }
-
-
     }
+
+    public boolean insertTime(Long time){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_4, time.toString());
+        long result = db.insert(TABLE_NAME2, null, contentValues);
+        if (result == -1){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
     public Cursor displayTable(){
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor values = db.rawQuery("select * from "+ TABLE_NAME,null );
         return values;
+    }
+
+    public long getTotalTime(){
+        long totalTime = 0;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select * from "+ TABLE_NAME2,null );
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                totalTime+=(Long.parseLong(cursor.getString(1)));
+            } while (cursor.moveToNext());
+        }
+        return totalTime;
     }
 
     public List<Classes> getAllClass() {

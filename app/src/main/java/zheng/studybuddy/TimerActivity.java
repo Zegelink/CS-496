@@ -1,11 +1,14 @@
 package zheng.studybuddy;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.sql.Time;
 
 public class TimerActivity extends Activity {
 
@@ -48,6 +51,18 @@ public class TimerActivity extends Activity {
 
                 timeSwapBuff += timeInMilliseconds;
                 customHandler.removeCallbacks(updateTimerThread);
+
+                classDatabase Db = new classDatabase(TimerActivity.this);
+                if (Db.insertTime(timeSwapBuff)){
+                    //showMessage("Success","data is inserted");
+                    Intent intent = new Intent(TimerActivity.this, MainActivity.class);
+                    startActivity(intent);
+
+                }
+                else{
+                    //display error message
+                    //showMessage("Error","data is not inserted");
+                }
 
             }
         });
