@@ -44,7 +44,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="zheng.studybuddy.MainActivity" />
         </activity>
-        <activity android:name=".TimerActivity"></activity>
+        <activity android:name=".TimerActivity" />
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="zheng.studybuddy.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
