@@ -11,8 +11,54 @@ import android.util.Log;
  * Created by Zheng on 5/2/2016.
  */
 public class classDatabase extends SQLiteOpenHelper {
+    public static final String DATABASE_NAME = "Class.db";
+    public static final String TABLE_NAME = "ClassInfo";
+    public static final String COL_1 = "ID";
+    public static final String COL_2 = "Class";
+    public static final String COL_3 = "School";
 
-    public static final int database_version =1;
+    public classDatabase(Context context) {
+        super(context, DATABASE_NAME, null, 1);
+        SQLiteDatabase db = this.getWritableDatabase();
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,Class TEXT,School TEXT)");
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME);
+        onCreate(db);
+    }
+    public boolean insertData(String className, String school){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_2, className);
+        contentValues.put(COL_3, school);
+        long result = db.insert(TABLE_NAME, null, contentValues);
+        if (result == -1){
+            return false;
+        }
+        else{
+            return true;
+        }
+
+
+    }
+    public Cursor displayTable(){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor values = db.rawQuery("select * from "+ classTable.Table.table ,null );
+        return values;
+    }
+
+
+}
+
+/*
+public static final int database_version =1;
     public String create_query = "CREATE TABLE"+ classTable.Table.table+"("+classTable.Table.className+" TEXT ,"+classTable.Table.schoolName+" TEXT );";
 
     public classDatabase(Context context){
@@ -47,11 +93,5 @@ public class classDatabase extends SQLiteOpenHelper {
         Log.d("Database operations", "Row inserted");
     }
 
-    public Cursor displayTable(){
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor values = db.rawQuery("select * from "+ classTable.Table.table ,null );
-        return values;
-    }
-}
-
+ */
