@@ -1,5 +1,6 @@
 package zheng.studybuddy;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -25,7 +26,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ListView list;
     classDatabase db;
     Button addButton;
     Button loginLink;
@@ -33,9 +33,6 @@ public class MainActivity extends AppCompatActivity {
     Button viewAll;
     ArrayList<String> listItems;
     ArrayAdapter<String> adapter;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,14 +50,21 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String email = intent.getStringExtra("email");
         if (email!=null) {
-            message = email + ", welcome to study!";
+            message = email + ", welcome to Study Buddy!";
         }
         else{
             message = "Login to study with your buddy!";
         }
         welcomeMessage.setText(message);
 
+        //setLoginLink();
+        //setRegisterLink();
+        setAddButton();
+        viewAll = (Button)findViewById(R.id.bViewAll);
+        viewAll();
+    }
 
+/*    public Button setLoginLink() {
         //add the link to the login
         loginLink = (Button) findViewById(R.id.tvLogin);
         loginLink.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +74,10 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(LoginIntent);
             }
         });
-        registerLink = (Button) findViewById(R.id.Registerbutton);
+        return loginLink;
+    }
+    public Button setRegisterLink() {
+        registerLink = (Button) findViewById(R.id.RegisterButton);
         registerLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,40 +85,20 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(registerIntent);
             }
         });
-
-
+        return registerLink;
+    }*/
+    public Button setAddButton() {
         addButton = (Button) findViewById(R.id.addClassButton);
-        ArrayList<String> listItems = new ArrayList<String>();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, listItems);
+        // ArrayList<String> listItems = new ArrayList<String>();
+        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, listItems);
         addButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-
-                Intent myIntent = new Intent(MainActivity.this, AddClass.class);
-                startActivity(myIntent);
+                Intent addIntent = new Intent(MainActivity.this, AddClass.class);
+                startActivity(addIntent);
             }
-
         });
-
-        viewAll = (Button)findViewById(R.id.bViewAll);
-        viewAll();
-
-
-        /*list = (ListView) findViewById(R.id.listView);
-        list.setAdapter(adapter);
-        Bundle data = getIntent().getExtras();
-        if (data != null) {
-
-            // String str = data.getString("class");
-            //   adapter.add(str);
-        }*/
-/*        Cursor value = db.displayTable();
-
-        StringBuffer buffer = new StringBuffer();
-        while (value.moveToNext()){
-            buffer.append("School:"+ value.getString(0)+"\n");
-            buffer.append("Class:"+ value.getString(1)+"\n");
-
-*/        }
+        return addButton;
+    }
 
     public void showMessage (String title, String Message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -148,14 +135,25 @@ public class MainActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch(item.getItemId()) {
+            case R.id.action_settings:
+                try {
+                    startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                } catch (ActivityNotFoundException ignored){}
+                return true;
+            case R.id.bLogin:
+                try {
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                } catch (ActivityNotFoundException ignored){}
+                return true;
+            case R.id.bRegister:
+                try {
+                    startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+                } catch (ActivityNotFoundException ignored){}
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
     public void viewAll(){
 

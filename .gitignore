@@ -1,5 +1,7 @@
 # Building Material
 .idea/*
+.idea/misc.xml
+app/app.iml
 .gradle
 target/*
 *.iml
