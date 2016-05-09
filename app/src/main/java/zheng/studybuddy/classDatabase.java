@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Zheng on 5/2/2016.
  */
@@ -50,48 +53,36 @@ public class classDatabase extends SQLiteOpenHelper {
     public Cursor displayTable(){
 
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor values = db.rawQuery("select * from "+ classTable.Table.table ,null );
+        Cursor values = db.rawQuery("select * from "+ TABLE_NAME,null );
         return values;
+    }
+
+    public List<String> getAllClass() {
+        List<String> classList = new ArrayList<>();
+
+        // select query
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        String classN;
+        String schoolN;
+        String finalN;
+        // looping through all table records and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                classN = cursor.getString(1)+"\n";
+                schoolN = cursor.getString(2)+"\n\n";
+                finalN = classN+schoolN;
+
+                // Adding friend to list
+                classList.add(finalN);
+            } while (cursor.moveToNext());
+        }
+
+        return classList;
     }
 
 
 }
 
-/*
-public static final int database_version =1;
-    public String create_query = "CREATE TABLE"+ classTable.Table.table+"("+classTable.Table.className+" TEXT ,"+classTable.Table.schoolName+" TEXT );";
-
-    public classDatabase(Context context){
-        super(context, classTable.Table.database, null, database_version);
-        Log.d("Database operations", "Database created");
-
-    }
-    @Override
-    public void onCreate(SQLiteDatabase arg0){
-
-        arg0.execSQL(create_query);
-        Log.d("Database operations", "Table created");
-
-    }
-
-
-    @Override
-    public void onUpgrade(SQLiteDatabase arg0, int oldVersion, int newVersion){
-
-        arg0.execSQL("DROP TABLE IF EXISTS "+ classTable.Table.table);
-        onCreate(arg0);
-        Log.d("Database Operations", "Table updated");
-    }
-
-    public void fillTable(classDatabase data, String classes, String schools){
-
-        SQLiteDatabase db = data.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(classTable.Table.className, classes);
-        values.put(classTable.Table.schoolName, schools);
-        long k = db.insert(classTable.Table.table, null, values );
-        Log.d("Database operations", "Row inserted");
-    }
-
-
- */

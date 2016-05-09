@@ -21,6 +21,7 @@ import android.view.View.OnClickListener;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -31,35 +32,37 @@ public class MainActivity extends AppCompatActivity {
     Button loginLink;
     Button registerLink;
     Button viewAll;
-    ArrayList<String> listItems;
-    ArrayAdapter<String> adapter;
+    List<String> classList;
+    private ListViewAdapter adapter;
 
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        db = new classDatabase(this);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final TextView welcomeMessage = (TextView)findViewById(R.id.tvWelcomeMsg);
+        db = new classDatabase(this);
+
+        final TextView welcomeMessage = (TextView) findViewById(R.id.tvWelcomeMsg);
         String message;
 
         //Display the user email when he logs in
         Intent intent = getIntent();
         String email = intent.getStringExtra("email");
-        if (email!=null) {
+        if (email != null) {
             message = email + ", welcome to study!";
-        }
-        else{
+        } else {
             message = "Login to study with your buddy!";
         }
         welcomeMessage.setText(message);
-
+        classList=db.getAllClass();
+        adapter = new ListViewAdapter(this, R.layout.item_listview, classList, db);
+        list.setAdapter(adapter);
 
         //add the link to the login
         loginLink = (Button) findViewById(R.id.tvLogin);
@@ -81,8 +84,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         addButton = (Button) findViewById(R.id.addClassButton);
-        ArrayList<String> listItems = new ArrayList<String>();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, listItems);
+        //ArrayList<String> listItems = new ArrayList<String>();
+        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, listItems);
         addButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
 
@@ -92,26 +95,12 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        viewAll = (Button)findViewById(R.id.bViewAll);
+        viewAll = (Button) findViewById(R.id.bViewAll);
         viewAll();
 
 
-        /*list = (ListView) findViewById(R.id.listView);
-        list.setAdapter(adapter);
-        Bundle data = getIntent().getExtras();
-        if (data != null) {
+    }
 
-            // String str = data.getString("class");
-            //   adapter.add(str);
-        }*/
-/*        Cursor value = db.displayTable();
-
-        StringBuffer buffer = new StringBuffer();
-        while (value.moveToNext()){
-            buffer.append("School:"+ value.getString(0)+"\n");
-            buffer.append("Class:"+ value.getString(1)+"\n");
-
-*/        }
 
     public void showMessage (String title, String Message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -172,8 +161,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                         StringBuffer buffer = new StringBuffer();
                         while(res.moveToNext()){
-                            buffer.append("Class:"+res.getString(0)+"\n");
-                            buffer.append("School:"+res.getString(1)+"\n\n");
+                            buffer.append("Class:"+res.getString(1)+"\n");
+                            buffer.append("School:"+res.getString(2)+"\n\n");
 
                         }
                         showMessage("Data", buffer.toString());
