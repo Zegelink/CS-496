@@ -9,26 +9,13 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_main" tools:context=".MainActivity">
 
-    <TextView android:text="@string/enrolled_classes" android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView"
-        android:enabled="false"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-        android:textSize="@dimen/abc_text_size_title_material"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/lvClass"
-        android:clickable="true"
+        android:layout_above="@+id/addClassButton"
         android:visibility="visible"
-        android:layout_below="@+id/tvWelcomeMsg"
-        android:layout_toStartOf="@+id/Registerbutton"
-        android:layout_alignParentEnd="true"
-        android:layout_above="@+id/addClassButton" />
+        android:layout_below="@+id/tvLogin" />
 
     <Button
         android:layout_width="wrap_content"
@@ -38,6 +25,15 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Study NOW!"
+        android:id="@+id/bStartStudy"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -61,7 +57,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tvWelcomeMsg"
-        android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -72,5 +67,6 @@
         android:id="@+id/bViewAll"
         android:layout_below="@+id/tvLogin"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:visibility="gone" />
 </RelativeLayout>

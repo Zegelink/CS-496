@@ -32,8 +32,8 @@ public class AddClass extends AppCompatActivity {
         addClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                className = (EditText) findViewById(R.id.editText2);
-                schoolName = (EditText) findViewById(R.id.editText3);
+                className = (EditText) findViewById(R.id.etClass);
+                schoolName = (EditText) findViewById(R.id.etSchool);
                 classString = className.getText().toString();
                 schoolString = schoolName.getText().toString();
                 classDatabase Db = new classDatabase(ctx);
