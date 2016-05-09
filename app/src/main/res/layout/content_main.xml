@@ -22,7 +22,7 @@
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/listView"
+        android:id="@+id/lvClass"
         android:clickable="true"
         android:visibility="visible"
         android:layout_below="@+id/tvWelcomeMsg"
@@ -64,4 +64,13 @@
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ViewALL"
+        android:id="@+id/bViewAll"
+        android:layout_below="@+id/tvLogin"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

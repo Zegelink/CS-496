@@ -26,19 +26,27 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    classDatabase db;
     Button addButton;
     Button loginLink;
     Button registerLink;
+    Button viewAll;
+    ArrayList<String> listItems;
+    ArrayAdapter<String> adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        db = new classDatabase(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //Display the user email when he logs in
         final TextView welcomeMessage = (TextView)findViewById(R.id.tvWelcomeMsg);
         String message;
+
+        //Display the user email when he logs in
         Intent intent = getIntent();
         String email = intent.getStringExtra("email");
         if (email!=null) {
@@ -52,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
         //setLoginLink();
         //setRegisterLink();
         setAddButton();
+        viewAll = (Button)findViewById(R.id.bViewAll);
+        viewAll();
     }
 
 /*    public Button setLoginLink() {
@@ -79,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     }*/
     public Button setAddButton() {
         addButton = (Button) findViewById(R.id.addClassButton);
-       // ArrayList<String> listItems = new ArrayList<String>();
+        // ArrayList<String> listItems = new ArrayList<String>();
         //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, listItems);
         addButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
@@ -88,6 +98,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         return addButton;
+    }
+
+    public void showMessage (String title, String Message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(Message);
+        builder.show();
     }
 
     //  public void onResume() {
@@ -137,4 +155,31 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+    public void viewAll(){
+
+        //display database info here
+        viewAll.setOnClickListener(
+                new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v){
+                        Cursor res = db.displayTable();
+                        if (res.getCount()==0){
+                            //show message
+                            showMessage("Error", "Nothing found ");
+                            return;
+                        }
+                        StringBuffer buffer = new StringBuffer();
+                        while(res.moveToNext()){
+                            buffer.append("Class:"+res.getString(0)+"\n");
+                            buffer.append("School:"+res.getString(1)+"\n\n");
+
+                        }
+                        showMessage("Data", buffer.toString());
+                    }
+                }
+        );
+
+    }
+
+
 }

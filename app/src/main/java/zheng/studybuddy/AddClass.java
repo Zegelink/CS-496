@@ -3,6 +3,7 @@ package zheng.studybuddy;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -36,13 +37,28 @@ public class AddClass extends AppCompatActivity {
                 classString = className.getText().toString();
                 schoolString = schoolName.getText().toString();
                 classDatabase Db = new classDatabase(ctx);
-                Db.fillTable(Db, classString, schoolString);
-                Db.displayTable();
-                Intent addClassToList = new Intent(AddClass.this, MainActivity.class);
+                if (Db.insertData(classString, schoolString)){
+                    //showMessage("Success","data is inserted");
+                    Intent addClassToList = new Intent(AddClass.this, MainActivity.class);
+                    startActivity(addClassToList);
+
+
+                }
+                else{
+                    showMessage("Error","data is not inserted");
+
+                }
+                //Db.displayTable();
               //  addClassToList.putExtra("class", className.getText().toString());
-                startActivity(addClassToList);
             }
         });
+    }
+    public void showMessage (String title, String Message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(Message);
+        builder.show();
     }
 
 }
