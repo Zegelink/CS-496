@@ -26,6 +26,8 @@
         android:clickable="true"
         android:visibility="visible"
         android:layout_below="@+id/tvWelcomeMsg"
+        android:layout_toStartOf="@+id/Registerbutton"
+        android:layout_alignParentEnd="true"
         android:layout_above="@+id/addClassButton" />
 
     <Button
@@ -37,25 +39,23 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-<!--
     <Button
         android:layout_width="wrap_content"
         android:text="@string/login"
         android:id="@+id/tvLogin"
         android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/RegisterButton"
-        android:layout_toStartOf="@+id/RegisterButton"
+        android:layout_toLeftOf="@+id/Registerbutton"
+        android:layout_toStartOf="@+id/Registerbutton"
         android:layout_height="wrap_content" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/register"
-        android:id="@+id/RegisterButton"
+        android:id="@+id/Registerbutton"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
--->
 
     <TextView
         android:layout_width="wrap_content"
