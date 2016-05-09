@@ -1,5 +1,6 @@
 package zheng.studybuddy;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -37,9 +38,6 @@ public class MainActivity extends AppCompatActivity {
     List<Classes> classList;
     private ListViewAdapter adapter;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -54,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
 
         db = new classDatabase(this);
         classList = new ArrayList<>();
-        reloadingDatabase();
 
         final TextView welcomeMessage = (TextView) findViewById(R.id.tvWelcomeMsg);
         String message;
@@ -63,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String email = intent.getStringExtra("email");
         if (email != null) {
-            message = email + ", welcome to study!";
+            message = email + ", Welcome to Study Buddy!";
         } else {
             message = "Login to study with your buddy!";
         }
@@ -71,10 +68,12 @@ public class MainActivity extends AppCompatActivity {
         message = message +"\n"+"You'v been studying "+time/1000+" seconds!";
         welcomeMessage.setText(message);
 
+        reloadingDatabase();
         //classList=db.getAllClass();
         //adapter = new ListViewAdapter(this, R.layout.item_listview, classList, db);
         //list.setAdapter(adapter);
 
+/*
         //add the link to the login
         loginLink = (Button) findViewById(R.id.tvLogin);
         loginLink.setOnClickListener(new View.OnClickListener() {
@@ -92,11 +91,13 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(registerIntent);
             }
         });
+*/
+        setAddButton();
+        getStudyNow();
+    }
 
-
+    public void setAddButton() {
         addButton = (Button) findViewById(R.id.addClassButton);
-        //ArrayList<String> listItems = new ArrayList<String>();
-        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, listItems);
         addButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
 
@@ -106,23 +107,21 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+    }
+
+    public Button getStudyNow() {
         studyNow = (Button) findViewById(R.id.bStartStudy);
         studyNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent LoginIntent = new Intent(MainActivity.this, TimerActivity.class);
-                MainActivity.this.startActivity(LoginIntent);
+                Intent timerIntent = new Intent(MainActivity.this, TimerActivity.class);
+                MainActivity.this.startActivity(timerIntent);
             }
         });
 
-        /*
-        //Not using this anymore
-        viewAll = (Button) findViewById(R.id.bViewAll);
-        viewAll();*/
-
-
+        return studyNow;
     }
-
+/*
 
     public void showMessage (String title, String Message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -131,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setMessage(Message);
         builder.show();
     }
+*/
 
     //  public void onResume() {
     //       super.onResume();
@@ -162,13 +162,32 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch(item.getItemId()){
+            case R.id.action_settings:
+                try {
+                    startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                } catch (ActivityNotFoundException ignored){}
+                return true;
+            case R.id.bLogin:
+                try {
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                } catch (ActivityNotFoundException ignored){}
+                return true;
+            case R.id.bRegister:
+                try {
+                    startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+                } catch (ActivityNotFoundException ignored){}
+                return true;
+            case R.id.addClassButton:
+                try {
+                    startActivity(new Intent(MainActivity.this, AddClass.class));
+                } catch (ActivityNotFoundException ignored){}
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
-    public void viewAll(){
+   /* public void viewAll(){
 
         //display database info here
         viewAll.setOnClickListener(
@@ -193,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
         );
 
     }
-
+*/
     public void reloadingDatabase() {
         classList = db.getAllClass();
         if (classList.size() == 0) {
