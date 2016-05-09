@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     Button loginLink;
     Button registerLink;
     Button viewAll;
+    Button studyNow;
     List<Classes> classList;
     private ListViewAdapter adapter;
 
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         list = (ListView) findViewById(R.id.lvClass);
+
 
 
         db = new classDatabase(this);
@@ -102,8 +104,19 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        studyNow = (Button) findViewById(R.id.bStartStudy);
+        studyNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent LoginIntent = new Intent(MainActivity.this, TimerActivity.class);
+                MainActivity.this.startActivity(LoginIntent);
+            }
+        });
+
+        /*
+        //Not using this anymore
         viewAll = (Button) findViewById(R.id.bViewAll);
-        viewAll();
+        viewAll();*/
 
 
     }
