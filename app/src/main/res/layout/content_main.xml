@@ -15,7 +15,7 @@
         android:id="@+id/lvClass"
         android:layout_above="@+id/addClassButton"
         android:visibility="visible"
-        android:layout_alignTop="@+id/tvWelcomeMsg" />
+        android:layout_below="@+id/tvWelcomeMsg" />
 
     <Button
         android:layout_width="wrap_content"
