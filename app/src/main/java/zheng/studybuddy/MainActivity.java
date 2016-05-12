@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             message = "Login to study with your buddy!";
         }
         long time = db.getTotalTime();
-        message = message +"\n"+"You'v been studying "+time/1000+" seconds!";
+        message = message +"\n"+"You've been studying "+time/1000+" seconds!";
         welcomeMessage.setText(message);
 
         reloadingDatabase();
