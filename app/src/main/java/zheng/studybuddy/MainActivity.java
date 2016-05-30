@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,8 +39,13 @@ public class MainActivity extends AppCompatActivity {
     List<Classes> classList;
     private ListViewAdapter adapter;
 
+    private static final String TAG = "MainActivity";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -67,6 +73,14 @@ public class MainActivity extends AppCompatActivity {
         long time = db.getTotalTime();
         message = message +"\n"+"You'v been studying "+time/1000+" seconds!";
         welcomeMessage.setText(message);
+
+        //receive firebase message
+        if (getIntent().getExtras() != null) {
+            for (String key : getIntent().getExtras().keySet()) {
+                String value = getIntent().getExtras().getString(key);
+                Log.d(TAG, "Key: " + key + " Value: " + value);
+            }
+        }
 
         reloadingDatabase();
         //classList=db.getAllClass();
