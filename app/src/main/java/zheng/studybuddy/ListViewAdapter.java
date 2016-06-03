@@ -51,7 +51,8 @@ public class ListViewAdapter extends ArrayAdapter<Classes> {
 
         holder.name.setText(getItem(position).getClassTaking());
 
-       holder.btnChat.setOnClickListener(new View.OnClickListener() {
+
+        holder.btnChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String nameOfClass = getItem(position).getClassTaking();
@@ -81,7 +82,7 @@ public class ListViewAdapter extends ArrayAdapter<Classes> {
                 chatDialog.setNegativeButton("Cancel", null);
 
 
-                    chatDialog.show();
+                chatDialog.show();
 
             }
         });
@@ -92,9 +93,17 @@ public class ListViewAdapter extends ArrayAdapter<Classes> {
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                databaseHelper.deleteFriend(getItem(position)); //delete in db
-                Toast.makeText(activity, "Deleted!", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder deleteDialog = new AlertDialog.Builder(activity);
+                deleteDialog.setTitle("Are You Sure you want to delete class: "+getItem(position).getClassTaking());
+                deleteDialog.setPositiveButton("Yes, delete it", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface deleteDialog, int which) {
+                        databaseHelper.deleteFriend(getItem(position)); //delete in db
+                        Toast.makeText(activity, "Deleted!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                deleteDialog.setNegativeButton("No, Keep my Class", null);
 
+                deleteDialog.show();
                 //reload the database to view
                 activity.reloadingDatabase();
             }
@@ -168,7 +177,7 @@ public class ListViewAdapter extends ArrayAdapter<Classes> {
                 TextView jobBox = new TextView(activity);
                 layout.addView(jobBox);
 
-                nameBox.setText("ID: " + getItem(position).getId());
+                nameBox.setText("Class: " + getItem(position).getId());
                 jobBox.setText("School: " + getItem(position).getSchool());
 
                 alertDialog.setView(layout);
@@ -178,7 +187,6 @@ public class ListViewAdapter extends ArrayAdapter<Classes> {
                 alertDialog.show();
             }
         });
-
         return convertView;
     }
 

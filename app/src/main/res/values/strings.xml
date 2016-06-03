@@ -26,9 +26,10 @@
     <string name="title_activity_settings">Settings</string>
 
     <!--Strings related to Chat-->
-    <string name="chat_button">Chat</string>
     <string name="chatroom">Chatroom</string>
-
+    <string name="chat_button">Chat</string>
+    <string name="edit_button">Edit Classname</string>
+    <string name="delete_button">Delete Class</string>
 
     <!-- Strings related to Settings -->
 

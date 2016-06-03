@@ -9,6 +9,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_main" tools:context=".MainActivity">
 
+
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,6 +17,13 @@
         android:layout_above="@+id/addClassButton"
         android:visibility="visible"
         android:layout_below="@+id/tvWelcomeMsg" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvWelcomeMsg"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -35,20 +43,12 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvWelcomeMsg"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/chatroom"
-        android:id="@+id/button"
-        android:layout_alignTop="@+id/bStartStudy"
-        android:layout_toRightOf="@+id/addClassButton"
-        android:layout_toEndOf="@+id/addClassButton" />
+        android:id="@+id/chatroom"
+        android:layout_below="@+id/lvClass"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
