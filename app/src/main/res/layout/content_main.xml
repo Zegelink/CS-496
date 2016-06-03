@@ -15,7 +15,7 @@
         android:id="@+id/lvClass"
         android:layout_above="@+id/addClassButton"
         android:visibility="visible"
-        android:layout_alignTop="@+id/tvWelcomeMsg" />
+        android:layout_below="@+id/tvWelcomeMsg" />
 
     <Button
         android:layout_width="wrap_content"
@@ -29,31 +29,11 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Study NOW!"
+        android:text="@string/study_timer"
         android:id="@+id/bStartStudy"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
-<!--
-
-    <Button
-        android:layout_width="wrap_content"
-        android:text="@string/login"
-        android:id="@+id/tvLogin"
-        android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/Registerbutton"
-        android:layout_toStartOf="@+id/Registerbutton"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/register"
-        android:id="@+id/Registerbutton"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
--->
 
     <TextView
         android:layout_width="wrap_content"
@@ -62,13 +42,13 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <!--    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ViewALL"
-            android:id="@+id/bViewAll"
-            android:layout_below="@+id/tvLogin"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:visibility="gone" />-->
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/chatroom"
+        android:id="@+id/button"
+        android:layout_alignTop="@+id/bStartStudy"
+        android:layout_toRightOf="@+id/addClassButton"
+        android:layout_toEndOf="@+id/addClassButton" />
+
 </RelativeLayout>

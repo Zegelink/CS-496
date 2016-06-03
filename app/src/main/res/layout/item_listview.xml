@@ -16,7 +16,7 @@
         android:id="@+id/edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/delete"
+        android:layout_toStartOf="@+id/delete"
         android:contentDescription="@string/app_name"
         android:src="@mipmap/ic_edit" />
 
@@ -24,7 +24,7 @@
         android:id="@+id/delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:contentDescription="@string/app_name"
         android:src="@mipmap/ic_delete" />
 
@@ -32,12 +32,11 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Chat"
+        android:text="@string/chat_button"
         android:id="@+id/chatButton"
-        android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/edit"
-        android:layout_toStartOf="@+id/edit"
-        android:onClick="myClickHandler"/>
+        android:onClick="myClickHandler"
+        android:layout_alignBottom="@+id/item_name"
+        android:layout_toStartOf="@+id/edit" />
 
 
 </RelativeLayout>

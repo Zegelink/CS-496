@@ -33,9 +33,6 @@ public class MainActivity extends AppCompatActivity {
     classDatabase db;
     Button goToChat;
     Button addButton;
-    Button loginLink;
-    Button registerLink;
-    Button viewAll;
     Button studyNow;
     List<Classes> classList;
     private ListViewAdapter adapter;
@@ -46,16 +43,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         list = (ListView) findViewById(R.id.lvClass);
-
-
 
         db = new classDatabase(this);
         classList = new ArrayList<>();

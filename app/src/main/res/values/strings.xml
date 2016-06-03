@@ -22,7 +22,13 @@
     <!--Strings related to Classes-->
     <string name="title_activity_add_class">Add Class</string>
     <string name="enrolled_classes">Enrolled Classes</string>
+    <string name="study_timer">Study Time!</string>
     <string name="title_activity_settings">Settings</string>
+
+    <!--Strings related to Chat-->
+    <string name="chat_button">Chat</string>
+    <string name="chatroom">Chatroom</string>
+
 
     <!-- Strings related to Settings -->
 
@@ -35,7 +41,7 @@
     </string>
 
     <string name="pref_title_display_name">Display name</string>
-    <string name="pref_default_display_name">John Smith</string>
+    <string name="pref_default_display_name">My Name</string>
 
     <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
     <string-array name="pref_example_list_titles">
