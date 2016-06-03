@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     ListView list;
     classDatabase db;
+    Button goToChat;
     Button addButton;
     Button loginLink;
     Button registerLink;
@@ -108,8 +109,21 @@ public class MainActivity extends AppCompatActivity {
 */
         setAddButton();
         getStudyNow();
+      //  enterChat();
     }
 
+    /*public void enterChat(){
+        goToChat = (Button) findViewById(R.id.chatButton);
+        goToChat.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent chatIntent = new Intent(MainActivity.this, chatActivity.class);
+                startActivity(chatIntent);
+            }
+        });
+
+
+    }*/
     public void setAddButton() {
         addButton = (Button) findViewById(R.id.addClassButton);
         addButton.setOnClickListener(new OnClickListener() {

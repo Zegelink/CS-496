@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "761653133499",
-    "firebase_url": "https://studybuddy-abc04.firebaseio.com",
-    "project_id": "studybuddy-abc04",
-    "storage_bucket": "studybuddy-abc04.appspot.com"
+    "project_number": "211697393687",
+    "firebase_url": "https://studybuddy-2db7e.firebaseio.com",
+    "project_id": "studybuddy-2db7e",
+    "storage_bucket": "studybuddy-2db7e.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:761653133499:android:6280d48ad9b67c4f",
+        "mobilesdk_app_id": "1:211697393687:android:6280d48ad9b67c4f",
         "android_client_info": {
           "package_name": "zheng.studybuddy"
         }
       },
       "oauth_client": [
         {
-          "client_id": "761653133499-u4sq34rb3jf3hk0rm40kfk532vki9ug3.apps.googleusercontent.com",
+          "client_id": "211697393687-3pepsekgapukbkgo3fh07mpn9o7q2geh.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAY4OY6PleAcub3bHgPwCKyStAtNFClCCc"
+          "current_key": "AIzaSyBwjN-g-oCLaKOAzU2qjo7BIIJw-_xoY1o"
         }
       ],
       "services": {
