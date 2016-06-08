@@ -1,6 +1,7 @@
 package zheng.studybuddy;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.DataSetObserver;
 import android.os.Bundle;
@@ -23,16 +24,21 @@ import java.util.Random;
  * Created by Chongxian Chen on 6/8/16.
  */
 public class ChatRoom extends ListActivity {
-    // TODO: change this to your own Firebase URL
-    private static final String FIREBASE_URL = "https://studybuddy-abc04.firebaseio.com";
+
 
     private String mUsername;
     private Firebase mFirebaseRef;
     private ValueEventListener mConnectedListener;
     private ChatListAdapter mChatListAdapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // TODO: change this to your own Firebase URL
+
+        Intent intent = getIntent();
+        String roomname = intent.getStringExtra("roomname");
+        final String FIREBASE_URL = "https://studybuddy-abc04.firebaseio.com/"+roomname;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatroom);
 
@@ -62,7 +68,8 @@ public class ChatRoom extends ListActivity {
                 sendMessage();
             }
         });
-
+        final TextView Room = (TextView) findViewById(R.id.tvRoomname);
+        Room.setText(roomname);
     }
 
     @Override

@@ -8,6 +8,7 @@ public class Chat {
     // Required default constructor for Firebase object mapping
     @SuppressWarnings("unused")
     private Chat() {
+
     }
 
     Chat(String message, String author) {
