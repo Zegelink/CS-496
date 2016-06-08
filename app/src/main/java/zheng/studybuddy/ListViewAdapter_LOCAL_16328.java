@@ -6,6 +6,7 @@ package zheng.studybuddy;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -157,7 +158,7 @@ public class ListViewAdapter extends ArrayAdapter<Classes> {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*
+
                 //subsribe to a class
                 String className = getItem(position).getClassTaking();
                 FirebaseMessaging.getInstance().subscribeToTopic(className);
@@ -176,28 +177,15 @@ public class ListViewAdapter extends ArrayAdapter<Classes> {
                 TextView jobBox = new TextView(activity);
                 layout.addView(jobBox);
 
-
-                TextView subsribeClass = new TextView(activity);
-                layout.addView(subsribeClass);
-
-                nameBox.setText("ID: " + getItem(position).getId());
+                nameBox.setText("Class: " + getItem(position).getId());
                 jobBox.setText("School: " + getItem(position).getSchool());
-                subsribeClass.setText("Subscribed to "+className);
 
                 alertDialog.setView(layout);
                 alertDialog.setNegativeButton("OK", null);
 
                 //show alert
                 alertDialog.show();
-                */
-                String className = getItem(position).getClassTaking();
-                String school = getItem(position).getSchool();
-                String roomname = school+"-"+className;
-                Intent intent = new Intent(activity, ChatRoom.class);
-                intent.putExtra("roomname", roomname);
-                activity.startActivity(intent);
             }
-
         });
         return convertView;
     }

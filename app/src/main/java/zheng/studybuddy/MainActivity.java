@@ -21,6 +21,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
+
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -98,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         addButton = (Button) findViewById(R.id.addClassButton);
         addButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, AddClass.class);
+                Intent myIntent = new Intent(MainActivity.this, ChatRoom.class);
                 startActivity(myIntent);
             }
         });

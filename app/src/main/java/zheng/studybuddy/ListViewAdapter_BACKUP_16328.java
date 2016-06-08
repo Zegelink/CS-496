@@ -6,6 +6,10 @@ package zheng.studybuddy;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+<<<<<<< HEAD
+import android.provider.ContactsContract;
+=======
+>>>>>>> firebase
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -176,11 +180,14 @@ public class ListViewAdapter extends ArrayAdapter<Classes> {
                 TextView jobBox = new TextView(activity);
                 layout.addView(jobBox);
 
-
+<<<<<<< HEAD
+                nameBox.setText("Class: " + getItem(position).getId());
+=======
                 TextView subsribeClass = new TextView(activity);
                 layout.addView(subsribeClass);
 
                 nameBox.setText("ID: " + getItem(position).getId());
+>>>>>>> firebase
                 jobBox.setText("School: " + getItem(position).getSchool());
                 subsribeClass.setText("Subscribed to "+className);
 

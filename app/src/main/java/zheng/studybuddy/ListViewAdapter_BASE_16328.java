@@ -5,14 +5,12 @@ package zheng.studybuddy;
  */
 import android.app.Activity;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -50,59 +48,13 @@ public class ListViewAdapter extends ArrayAdapter<Classes> {
 
         holder.name.setText(getItem(position).getClassTaking());
 
-
-        holder.btnChat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String nameOfClass = getItem(position).getClassTaking();
-                final AlertDialog.Builder chatDialog = new AlertDialog.Builder(activity);
-                chatDialog.setTitle(nameOfClass);
-
-                LinearLayout layout = new LinearLayout(activity);
-                layout.setPadding(10, 10, 10, 10);
-                layout.setOrientation(LinearLayout.VERTICAL);
-
-                final EditText chatBox = new EditText(activity);
-                chatBox.setHint("Message");
-                layout.addView(chatBox);
-
-                chatDialog.setView(layout);
-
-                chatDialog.setPositiveButton("Send", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        String message = chatBox.getText().toString();
-
-                    }
-                });
-
-                chatDialog.setNegativeButton("Cancel", null);
-
-
-                chatDialog.show();
-
-            }
-        });
-
-
-
         //Delete an item
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder deleteDialog = new AlertDialog.Builder(activity);
-                deleteDialog.setTitle("Are You Sure you want to delete class: "+getItem(position).getClassTaking());
-                deleteDialog.setPositiveButton("Yes, delete it", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface deleteDialog, int which) {
-                        databaseHelper.deleteFriend(getItem(position)); //delete in db
-                        Toast.makeText(activity, "Deleted!", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                deleteDialog.setNegativeButton("No, Keep my Class", null);
+                databaseHelper.deleteFriend(getItem(position)); //delete in db
+                Toast.makeText(activity, "Deleted!", Toast.LENGTH_SHORT).show();
 
-                deleteDialog.show();
                 //reload the database to view
                 activity.reloadingDatabase();
             }
@@ -157,7 +109,7 @@ public class ListViewAdapter extends ArrayAdapter<Classes> {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*
+
                 //subsribe to a class
                 String className = getItem(position).getClassTaking();
                 FirebaseMessaging.getInstance().subscribeToTopic(className);
@@ -176,29 +128,17 @@ public class ListViewAdapter extends ArrayAdapter<Classes> {
                 TextView jobBox = new TextView(activity);
                 layout.addView(jobBox);
 
-
-                TextView subsribeClass = new TextView(activity);
-                layout.addView(subsribeClass);
-
                 nameBox.setText("ID: " + getItem(position).getId());
                 jobBox.setText("School: " + getItem(position).getSchool());
-                subsribeClass.setText("Subscribed to "+className);
 
                 alertDialog.setView(layout);
                 alertDialog.setNegativeButton("OK", null);
 
                 //show alert
                 alertDialog.show();
-                */
-                String className = getItem(position).getClassTaking();
-                String school = getItem(position).getSchool();
-                String roomname = school+"-"+className;
-                Intent intent = new Intent(activity, ChatRoom.class);
-                intent.putExtra("roomname", roomname);
-                activity.startActivity(intent);
             }
-
         });
+
         return convertView;
     }
 
@@ -206,13 +146,11 @@ public class ListViewAdapter extends ArrayAdapter<Classes> {
         private TextView name;
         private View btnDelete;
         private View btnEdit;
-        private View btnChat;
 
         public ViewHolder (View v) {
             name = (TextView)v.findViewById(R.id.item_name);
             btnDelete = v.findViewById(R.id.delete);
             btnEdit = v.findViewById(R.id.edit);
-            btnChat = v.findViewById(R.id.chatButton);
         }
     }
 }
