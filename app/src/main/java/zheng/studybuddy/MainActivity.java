@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
         classList = new ArrayList<>();
     }
 
+    //actually a chatroom now.
     public Button setAddButton() {
         addButton = (Button) findViewById(R.id.addClassButton);
         addButton.setOnClickListener(new OnClickListener() {

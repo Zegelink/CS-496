@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -49,8 +48,7 @@ public class ListViewAdapter extends ArrayAdapter<Classes> {
         }
 
         holder.name.setText(getItem(position).getClassTaking());
-
-
+/*
         holder.btnChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,6 +83,7 @@ public class ListViewAdapter extends ArrayAdapter<Classes> {
 
             }
         });
+*/
 
 
 
@@ -101,7 +100,6 @@ public class ListViewAdapter extends ArrayAdapter<Classes> {
                     }
                 });
                 deleteDialog.setNegativeButton("No, Keep my Class", null);
-
                 deleteDialog.show();
                 //reload the database to view
                 activity.reloadingDatabase();
