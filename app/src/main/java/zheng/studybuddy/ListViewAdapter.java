@@ -128,8 +128,12 @@ public class ListViewAdapter extends ArrayAdapter<Classes> {
                 TextView jobBox = new TextView(activity);
                 layout.addView(jobBox);
 
+                TextView subsribeClass = new TextView(activity);
+                layout.addView(subsribeClass);
+
                 nameBox.setText("ID: " + getItem(position).getId());
                 jobBox.setText("School: " + getItem(position).getSchool());
+                subsribeClass.setText("Subscribed to "+className);
 
                 alertDialog.setView(layout);
                 alertDialog.setNegativeButton("OK", null);

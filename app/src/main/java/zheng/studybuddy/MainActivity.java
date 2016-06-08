@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         addButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
 
-                Intent myIntent = new Intent(MainActivity.this, AddClass.class);
+                Intent myIntent = new Intent(MainActivity.this, ChatRoom.class);
                 startActivity(myIntent);
             }
 
