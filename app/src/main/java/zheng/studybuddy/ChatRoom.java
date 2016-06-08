@@ -20,11 +20,11 @@ import com.firebase.client.ValueEventListener;
 import java.util.Random;
 
 /**
- * Created by georgechen on 6/8/16.
+ * Created by Chongxian Chen on 6/8/16.
  */
 public class ChatRoom extends ListActivity {
     // TODO: change this to your own Firebase URL
-    private static final String FIREBASE_URL = "studybuddy-abc04.firebaseio.com";
+    private static final String FIREBASE_URL = "https://studybuddy-abc04.firebaseio.com";
 
     private String mUsername;
     private Firebase mFirebaseRef;
