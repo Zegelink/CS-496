@@ -128,7 +128,7 @@ public class ChatRoom extends ListActivity {
             if (mUsername == null) {
                 Random r = new Random();
                 // Assign a random user name if we don't have one saved.
-                mUsername = "User" + r.nextInt(100000);
+                mUsername = "CollegeKid" + r.nextInt(100000);
                 prefs.edit().putString("username", mUsername).commit();
             }
         }

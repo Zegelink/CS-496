@@ -1,12 +1,23 @@
 package zheng.studybuddy;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.sql.Time;
 
@@ -53,8 +64,38 @@ public class TimerActivity extends Activity {
                 customHandler.removeCallbacks(updateTimerThread);
 
                 classDatabase Db = new classDatabase(TimerActivity.this);
+                Log.d("1", "get");
                 if (Db.insertTime(timeSwapBuff)){
-                    //showMessage("Success","data is inserted");
+                    Log.d("2", "get");
+                    Response.Listener<String> rl = new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                JSONObject jsonResponse = new JSONObject(response);
+                                boolean success = jsonResponse.getBoolean("success");
+                                if (success){
+                                }
+                                else {
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(TimerActivity.this);
+                                    builder.setMessage("Update failed")
+                                            .setNegativeButton("Retry", null)
+                                            .create()
+                                            .show();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    };
+                    SharedPreferences prefs1 = getSharedPreferences("Session",     Context.MODE_PRIVATE);
+                    String email = prefs1.getString("email", "");
+
+                    if (email != null && !email.isEmpty()){
+                        long TotalTime = Db.getTotalTime();
+                        UpdateTime ut = new UpdateTime(email, TotalTime, rl);//response listener
+                        RequestQueue queue = Volley.newRequestQueue(TimerActivity.this);
+                        queue.add(ut);
+                    }
                     Intent intent = new Intent(TimerActivity.this, MainActivity.class);
 
                     startActivity(intent);
