@@ -169,7 +169,6 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.clear();
         editor.commit();
-        reloadingDatabase();
     }
 
     public void reloadingDatabase() {
