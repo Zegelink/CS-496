@@ -16,16 +16,16 @@
         android:id="@+id/edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/delete"
-        android:contentDescription="@string/app_name"
+        android:layout_toStartOf="@+id/delete"
+        android:contentDescription="@string/cEdit"
         android:src="@mipmap/ic_edit" />
 
     <ImageView
         android:id="@+id/delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:contentDescription="@string/app_name"
+        android:layout_alignParentEnd="true"
+        android:contentDescription="@string/cDelete"
         android:src="@mipmap/ic_delete" />
 
 </RelativeLayout>
