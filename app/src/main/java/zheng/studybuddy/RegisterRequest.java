@@ -20,7 +20,6 @@ public class RegisterRequest extends StringRequest{
         params = new HashMap<>();
         params.put("email", email);
         params.put("password", password);
-        params.put("time", "0");
     }
 
     @Override

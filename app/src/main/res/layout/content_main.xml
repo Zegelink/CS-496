@@ -68,7 +68,7 @@
         android:text="Logout"
         android:onClick="logout"
         android:id="@+id/btLogout"
-        android:layout_above="@+id/addClassButton"
+        android:layout_below="@+id/lvClass"
         android:layout_centerHorizontal="true" />
 
     <!--    <Button
