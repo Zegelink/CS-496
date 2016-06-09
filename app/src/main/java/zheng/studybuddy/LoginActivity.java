@@ -1,6 +1,8 @@
 package zheng.studybuddy;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,10 +21,15 @@ import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
 
+    SharedPreferences sharedpreferences;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        sharedpreferences = getSharedPreferences("Session", Context.MODE_PRIVATE);
 
 
         final EditText etEmail = (EditText) findViewById(R.id.etEmail);
@@ -54,8 +61,16 @@ public class LoginActivity extends AppCompatActivity {
 
                             if (success){
                                 String email = jsonResponse.getString("email");
+                                long timeStudied = jsonResponse.getLong("timeStudied");
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.putExtra("email", email);
+
+                                SharedPreferences.Editor editor = sharedpreferences.edit();
+                                editor.putString("email", email);
+                                editor.putLong("timeStudied", timeStudied);
+                                editor.commit();
+
+
                                 LoginActivity.this.startActivity(intent);
                             }
                             else {

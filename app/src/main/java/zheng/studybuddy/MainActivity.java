@@ -1,31 +1,27 @@
 package zheng.studybuddy;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
-
 import com.firebase.client.Firebase;
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -78,26 +74,13 @@ public class MainActivity extends AppCompatActivity {
         reloadingDatabase();
     }
 
-    //  enterChat();
-    /*public void enterChat(){
-        goToChat = (Button) findViewById(R.id.chatButton);
-        goToChat.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent chatIntent = new Intent(MainActivity.this, chatActivity.class);
-                startActivity(chatIntent);
-            }
-        });
-
-
-    }*/
     public void listView() {
         list = (ListView) findViewById(R.id.lvClass);
         db = new classDatabase(this);
         classList = new ArrayList<>();
     }
 
-    //actually a chatroom now.
+    //Actually a chatroom now.
     public Button setAddButton() {
         addButton = (Button) findViewById(R.id.addClassButton);
         addButton.setOnClickListener(new OnClickListener() {
@@ -184,6 +167,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void logout(View view){
+        SharedPreferences sharedpreferences = getSharedPreferences("Session", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.clear();
+        editor.commit();
+        reloadingDatabase();
+    }
+
     public void reloadingDatabase() {
         classList = db.getAllClass();
         if (classList.size() == 0) {
@@ -194,6 +185,20 @@ public class MainActivity extends AppCompatActivity {
         list.setAdapter(adapter);
         //title.setVisibility(View.VISIBLE);
         //title.setText("Total records: " + databaseHelper.getContactsCount());
+    }
+
+    private void handleNotification() {
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 18);
+        calendar.set(Calendar.MINUTE, 41);
+        calendar.set(Calendar.SECOND, 00);
+        Intent alarmIntent = new Intent(this, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 86400000, pendingIntent);
     }
 
 

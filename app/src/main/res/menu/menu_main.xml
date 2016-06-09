@@ -11,6 +11,11 @@
         android:orderInCategory="2"
         app:showAsAction="ifRoom" />
 
+    <item android:id="@+id/bLogout"
+        android:title="@string/logout"
+        android:orderInCategory="2"
+        app:showAsAction="never" />
+
     <item android:id="@+id/bRegister"
         android:title="@string/register"
         android:orderInCategory="3"

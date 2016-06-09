@@ -1,6 +1,6 @@
 <resources>
     <!--App-->
-    <string name="app_name">StudyBuddy</string>
+    <string name="app_name">Study Buddy</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_peoplelist">Peoplelist</string>
 
@@ -24,14 +24,13 @@
     <string name="enrolled_classes">Enrolled Classes</string>
     <string name="study_timer">Study Time!</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="study_timer">Study Timer</string>
+    <string name="cDelete">Delete class</string>
+    <string name="cEdit">Edit class name</string>
 
-    <!--Strings related to Chat-->
-    <string name="chatroom">Chatroom</string>
-    <string name="chat_button">Chat</string>
-    <string name="edit_button">Edit Classname</string>
-    <string name="delete_button">Delete Class</string>
-
-    <!-- Strings related to Settings -->
+    <!-- Strings related to Chatroom -->
+    <string name="chat_freenode">Chat Everyone!</string>
+    <string name="chat_room">Chatroom</string>
 
     <!-- Example General settings -->
     <string name="pref_header_general">General</string>

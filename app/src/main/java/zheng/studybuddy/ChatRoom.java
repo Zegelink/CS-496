@@ -1,6 +1,7 @@
 package zheng.studybuddy;
 
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.DataSetObserver;
@@ -115,13 +116,24 @@ public class ChatRoom extends ListActivity {
     }
 
     private void setupUsername() {
-        SharedPreferences prefs = getApplication().getSharedPreferences("ChatPrefs", 0);
-        mUsername = prefs.getString("username", null);
-        if (mUsername == null) {
-            Random r = new Random();
-            // Assign a random user name if we don't have one saved.
-            mUsername = "JavaUser" + r.nextInt(100000);
-            prefs.edit().putString("username", mUsername).commit();
+        //use sharedpreference to get the user name.
+        SharedPreferences prefs1 = getSharedPreferences("Session",     Context.MODE_PRIVATE);
+        String email = prefs1.getString("email", "");
+
+        //check if the user is logged in
+        if ( (email == null || email.isEmpty())){
+            SharedPreferences prefs = getApplication().getSharedPreferences("ChatPrefs", 0);
+            mUsername = prefs.getString("username", null);
+            //if this device doesn't have a ChatPrefs username, generate one
+            if (mUsername == null) {
+                Random r = new Random();
+                // Assign a random user name if we don't have one saved.
+                mUsername = "User" + r.nextInt(100000);
+                prefs.edit().putString("username", mUsername).commit();
+            }
+        }
+        else{
+            mUsername = email;
         }
     }
 

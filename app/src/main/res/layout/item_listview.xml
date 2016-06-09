@@ -17,33 +17,16 @@
         android:id="@+id/edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/edit_button"
-        android:src="@mipmap/ic_edit"
-        android:layout_alignBottom="@+id/item_name"
-        android:layout_toLeftOf="@+id/delete"
         android:layout_toStartOf="@+id/delete"
-        android:clickable="false" />
+        android:contentDescription="@string/cEdit"
+        android:src="@mipmap/ic_edit" />
 
     <ImageView
         android:id="@+id/delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/delete_button"
-        android:src="@mipmap/ic_delete"
-        android:layout_alignTop="@+id/edit"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:clickable="false" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/chatButton"
-        android:src="@android:drawable/stat_notify_chat"
-        android:layout_alignBottom="@+id/edit"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:contentDescription="@string/chat_button" />
-
+        android:contentDescription="@string/cDelete"
+        android:src="@mipmap/ic_delete" />
 
 </RelativeLayout>
