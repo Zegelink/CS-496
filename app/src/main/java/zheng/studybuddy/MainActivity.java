@@ -3,7 +3,9 @@ package zheng.studybuddy;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -210,7 +212,14 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-   /* public void viewAll(){
+    public  void logout(View view){
+        SharedPreferences sharedpreferences = getSharedPreferences("Session", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.clear();
+        editor.commit();
+    }
+
+    /* public void viewAll(){
 
         //display database info here
         viewAll.setOnClickListener(

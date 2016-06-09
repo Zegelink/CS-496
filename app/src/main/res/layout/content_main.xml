@@ -62,13 +62,22 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-<!--    <Button
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ViewALL"
-        android:id="@+id/bViewAll"
-        android:layout_below="@+id/tvLogin"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:visibility="gone" />-->
+        android:text="Logout"
+        android:onClick="logout"
+        android:id="@+id/btLogout"
+        android:layout_above="@+id/addClassButton"
+        android:layout_centerHorizontal="true" />
+
+    <!--    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ViewALL"
+            android:id="@+id/bViewAll"
+            android:layout_below="@+id/tvLogin"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:visibility="gone" />-->
 </RelativeLayout>
