@@ -20,6 +20,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 import com.firebase.client.Firebase;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -71,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         setAddButton();
         getStudyNow();
         reloadingDatabase();
+        handleNotification();
     }
     public void listView() {
         list = (ListView) findViewById(R.id.lvClass);
@@ -184,10 +188,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void handleNotification() {
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 10);
-        calendar.set(Calendar.MINUTE, 56);
+        Log.d("time",df.format(calendar.getTime()));
+        calendar.set(Calendar.HOUR_OF_DAY, 11);
+        calendar.set(Calendar.MINUTE, 40);
         calendar.set(Calendar.SECOND, 00);
         Intent alarmIntent = new Intent(this, AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
