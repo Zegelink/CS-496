@@ -1,7 +1,11 @@
 package zheng.studybuddy;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,6 +13,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,9 +25,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
+
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -38,13 +46,22 @@ public class MainActivity extends AppCompatActivity {
     List<Classes> classList;
     private ListViewAdapter adapter;
 
+    private static final String TAG = "MainActivity";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+         handleNotification();
 
         list = (ListView) findViewById(R.id.lvClass);
 
@@ -67,6 +84,14 @@ public class MainActivity extends AppCompatActivity {
         long time = db.getTotalTime();
         message = message +"\n"+"You've been studying "+time/1000+" seconds!";
         welcomeMessage.setText(message);
+
+        //receive firebase message
+        if (getIntent().getExtras() != null) {
+            for (String key : getIntent().getExtras().keySet()) {
+                String value = getIntent().getExtras().getString(key);
+                Log.d(TAG, "Key: " + key + " Value: " + value);
+            }
+        }
 
         reloadingDatabase();
         //classList=db.getAllClass();
@@ -101,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         addButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
 
-                Intent myIntent = new Intent(MainActivity.this, AddClass.class);
+                Intent myIntent = new Intent(MainActivity.this, ChatRoom.class);
                 startActivity(myIntent);
             }
 
@@ -187,7 +212,14 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-   /* public void viewAll(){
+    public  void logout(View view){
+        SharedPreferences sharedpreferences = getSharedPreferences("Session", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.clear();
+        editor.commit();
+    }
+
+    /* public void viewAll(){
 
         //display database info here
         viewAll.setOnClickListener(
@@ -223,6 +255,20 @@ public class MainActivity extends AppCompatActivity {
         list.setAdapter(adapter);
         //title.setVisibility(View.VISIBLE);
         //title.setText("Total records: " + databaseHelper.getContactsCount());
+    }
+
+    private void handleNotification() {
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 18);
+        calendar.set(Calendar.MINUTE, 41);
+        calendar.set(Calendar.SECOND, 00);
+        Intent alarmIntent = new Intent(this, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 86400000, pendingIntent);
     }
 
 
