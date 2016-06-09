@@ -56,6 +56,7 @@ public class TimerActivity extends Activity {
                 if (Db.insertTime(timeSwapBuff)){
                     //showMessage("Success","data is inserted");
                     Intent intent = new Intent(TimerActivity.this, MainActivity.class);
+
                     startActivity(intent);
 
                 }
