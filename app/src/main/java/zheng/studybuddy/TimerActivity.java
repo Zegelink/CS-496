@@ -74,11 +74,6 @@ public class TimerActivity extends Activity {
                                 JSONObject jsonResponse = new JSONObject(response);
                                 boolean success = jsonResponse.getBoolean("success");
                                 if (success){
-                                    AlertDialog.Builder builder = new AlertDialog.Builder(TimerActivity.this);
-                                    builder.setMessage("Update success")
-                                            .setNegativeButton("Retry", null)
-                                            .create()
-                                            .show();
                                 }
                                 else {
                                     AlertDialog.Builder builder = new AlertDialog.Builder(TimerActivity.this);
