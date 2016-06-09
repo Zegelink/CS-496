@@ -164,11 +164,12 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-    public  void logout(View view){
+    public void logout(View view){
         SharedPreferences sharedpreferences = getSharedPreferences("Session", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.clear();
         editor.commit();
+        reloadingDatabase();
     }
 
     public void reloadingDatabase() {
